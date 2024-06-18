@@ -1,0 +1,30 @@
+﻿@page "/products"
+@using BAG.DOMAIN.Entities
+@using BAG.DOMAIN.Models
+@using Rad.Blazor.Components.ProductComponents
+@using Rad.Blazor.Services
+
+
+@rendermode InteractiveServer
+
+<CascadingValue Value="ProductService">
+<BagList BagiSelected="ShowDetails"/>
+<Pager/>
+</CascadingValue>
+
+<BagDetails bagi="SelectedBagi"/>
+
+@code {
+[Inject] IProductService<Bagi> ProductService { get; set; }
+
+[Parameter]
+	public Bagi SelectedBagi { get; set; }
+	protected override async Task OnInitializedAsync()
+	{
+	await ProductService.GetProducts();
+	}
+	void ShowDetails(int id)
+	{
+	SelectedBagi = ProductService.Products.First(d => d.BagId == id);
+	}
+}

@@ -1,0 +1,23 @@
+﻿@using BAG.DOMAIN.Entities
+@using Radyuk.UI
+<h3>Детали</h3>
+
+
+
+@if (bagi!= null)
+{
+	<div class="card mt-5" style="width: 18rem;">
+		<img src="@bagi.Image" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">@bagi.BagName</h5>
+			<p class="card-text">@bagi.Description</p>
+
+		</div>
+	</div>
+}
+@code {
+	[Parameter]
+	public Bagi bagi { get; set; }
+	[Parameter]
+	public EventCallback<Bagi> BagiChanged { get; set; }
+	}
